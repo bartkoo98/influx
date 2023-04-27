@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
+    
+<!--    <includeAll path = "database" relativeToChangelogFile="true"/>-->
+    <include file="01_create_table_category.xml" relativeToChangelogFile="true"/>
+    <include file="02_create_table_user_account.xml" relativeToChangelogFile="true"/>
+    <include file="03_create_table_post.xml" relativeToChangelogFile="true"/>
+
+    <include file="01_categories.sql" relativeToChangelogFile="true" context="dev"/>
+    <include file="02_users.sql" relativeToChangelogFile="true" context="dev"/>
+    <include file="03_posts.sql" relativeToChangelogFile="true" context="dev"/>
+</databaseChangeLog>
