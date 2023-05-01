@@ -5,7 +5,7 @@ spring:
 
   liquibase:
     contexts: dev
-    change-log: classpath:database/liquibase-changelog.xml
+    change-log: classpath:database/changelog/master.xml
   jpa:
       hibernate:
         ddl-auto: validate

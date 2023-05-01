@@ -1,0 +1,3 @@
+insert into post (title, content, date_added, category_id, user_account_id) values ('Najnowsze technologie w swiecie IT', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', '2023-05-01 19:50:00', 1, 1);
+insert into post (title, content, date_added, category_id, user_account_id) values ('Poznaj sekrety zywienia.', 'Lorem Ipsum is simply dummy text of the printing and typesetting', '2023-04-21 10:50:00', 2, 2);
+insert into post (title, content, date_added, category_id, user_account_id) values ('Airbus testuje nowy samolot o dużym zasięgu.', 'Lorem Ipsum is simply dummy text of the printing.', '2023-04-16 12:00:00', 3, 3);

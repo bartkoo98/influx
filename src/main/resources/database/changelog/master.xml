@@ -10,7 +10,7 @@
     <include file="02_create_table_user_account.xml" relativeToChangelogFile="true"/>
     <include file="03_create_table_post.xml" relativeToChangelogFile="true"/>
 
-    <include file="01_categories.sql" relativeToChangelogFile="true" context="dev"/>
-    <include file="02_users.sql" relativeToChangelogFile="true" context="dev"/>
-    <include file="03_posts.sql" relativeToChangelogFile="true" context="dev"/>
+    <include file="../testdata/01_categories.sql" relativeToChangelogFile="true" context="dev"/>
+    <include file="../testdata/02_users.sql" relativeToChangelogFile="true" context="dev"/>
+    <include file="../testdata/03_posts.sql" relativeToChangelogFile="true" context="dev"/>
 </databaseChangeLog>
