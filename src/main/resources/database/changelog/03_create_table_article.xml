@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
         https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
     <changeSet id="03-1" author="bartkoo98">
-        <createTable tableName="post">
+        <createTable tableName="article">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
@@ -18,13 +18,13 @@
             <column name="date_added" type="DATETIME"/>
             <column name="category_id" type="BIGINT">
                 <constraints nullable="false"
-                             foreignKeyName="fk_post_category"
+                             foreignKeyName="fk_article_category"
                              referencedTableName="category"
                              referencedColumnNames="id"/>
             </column>
             <column name="user_account_id" type="BIGINT">
                 <constraints nullable="false"
-                             foreignKeyName="fk_post_user_account"
+                             foreignKeyName="fk_article_user_account"
                              referencedTableName="user_account"
                              referencedColumnNames="id"/>
             </column>
