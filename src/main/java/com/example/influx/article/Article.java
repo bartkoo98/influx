@@ -21,13 +21,13 @@ public class Article {
     private String content;
     private LocalDateTime dateAdded;
     @ManyToOne
-    @JoinColumn(name="category_id", referencedColumnName = "id")
+    @JoinColumn(name="category_id")
     private Category category;
     @ManyToOne
-    @JoinColumn(name = "user_account_id", referencedColumnName = "id")
+    @JoinColumn(name = "user_account_id")
     private UserAccount userAccount;
 
-    @OneToMany
-    @JoinColumn(name="article_id")
+    @OneToMany(cascade = CascadeType.REMOVE) // potrzebne do usuniecia komentarzy przy usuwaniu posta
+    @JoinColumn(name="article_id", updatable = false, insertable = false)
     private List<Comment> comment;
 }

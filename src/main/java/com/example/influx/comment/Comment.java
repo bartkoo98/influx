@@ -16,7 +16,9 @@ public class Comment {
     private Long id;
     private String content;
     private LocalDateTime dateAdded;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "user_account_id")
     private UserAccount userAccount;
+
+
 }

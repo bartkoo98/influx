@@ -1,9 +1,7 @@
 package com.example.influx.article;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,6 +19,22 @@ public class ArticleController {
     @GetMapping("/articles/{id}")
     public Optional<Article> getArticleById(@PathVariable long id) {
         return articleService.getArticleById(id);
+    }
+
+
+    @PostMapping("/articles")
+    public Article addArticle(@RequestBody Article article) {
+        return articleService.addArticle(article);
+    }
+
+    @PutMapping("/articles")
+    public Article editArticle(@RequestBody Article article) {
+        return articleService.editArticle(article);
+    }
+
+    @DeleteMapping("/articles/{id}")
+    public void deleteArticle(@PathVariable Long id) {
+        articleService.deleteArticle(id);
     }
 
 }
