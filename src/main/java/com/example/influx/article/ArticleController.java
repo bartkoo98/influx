@@ -1,5 +1,7 @@
 package com.example.influx.article;
 
+import com.example.influx.comment.Comment;
+import com.example.influx.comment.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,6 +12,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ArticleController {
     private final ArticleService articleService;
+    private final CommentService commentService;
 
     @GetMapping("/articles")
     public List<Article> getArticles() {
@@ -27,7 +30,7 @@ public class ArticleController {
         return articleService.addArticle(article);
     }
 
-    @PutMapping("/articles")
+    @PutMapping("/articles/{id}")
     public Article editArticle(@RequestBody Article article) {
         return articleService.editArticle(article);
     }
@@ -36,5 +39,11 @@ public class ArticleController {
     public void deleteArticle(@PathVariable Long id) {
         articleService.deleteArticle(id);
     }
+
+    @GetMapping("/articles/{id}/comments")
+    public List<Comment> getAllCommentsForArticle(@PathVariable Long id) {
+        return commentService.getAllCommentsForArticle(id);
+    }
+
 
 }
