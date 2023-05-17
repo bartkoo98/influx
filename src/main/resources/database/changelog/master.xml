@@ -7,13 +7,13 @@
     
 <!--    <includeAll path = "database" relativeToChangelogFile="true"/>-->
     <include file="01_create_table_category.xml" relativeToChangelogFile="true"/>
-    <include file="02_create_table_user_account.xml" relativeToChangelogFile="true"/>
+    <include file="02_create_table_user_accounts_and_roles.xml" relativeToChangelogFile="true"/>
     <include file="03_create_table_article.xml" relativeToChangelogFile="true"/>
     <include file="04_create_table_comment.xml" relativeToChangelogFile="true"/>
 
 
     <include file="../testdata/01_categories.sql" relativeToChangelogFile="true" context="dev"/>
-    <include file="../testdata/02_users.sql" relativeToChangelogFile="true" context="dev"/>
+    <include file="../testdata/02_users_and_roles.sql" relativeToChangelogFile="true" context="dev"/>
     <include file="../testdata/03_articles.sql" relativeToChangelogFile="true" context="dev"/>
     <include file="../testdata/04_comments.sql" relativeToChangelogFile="true" context="dev"/>
 

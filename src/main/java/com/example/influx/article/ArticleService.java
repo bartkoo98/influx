@@ -1,5 +1,6 @@
 package com.example.influx.article;
 
+import com.example.influx.comment.CommentRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
