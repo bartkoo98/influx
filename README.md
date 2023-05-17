@@ -1,11 +1,10 @@
-# Influx - 
+# Influx - articles about everything - stay closer to your favorite creators!
 
 ## About:
 This is a project I am currently working hard on. Api works a bit like a
 large collection of blogs, where each creator can add his articles on
 various topics, start a discussion in the comments with readers, or
-throw in short notes. My inspiration was the substack website. 
-Soon:
+throw in short notes. My inspiration was the substack website. Soon:
 * Subscription option to let the creator manage who can see the articles.
 * Possibility of sending articles like newsletters.
 * Register with email confirmation. Login with Google/Facebook account.
