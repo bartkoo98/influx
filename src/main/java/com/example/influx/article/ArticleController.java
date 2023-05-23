@@ -1,5 +1,7 @@
 package com.example.influx.article;
 
+import com.example.influx.article.dto.ArticleDto;
+import com.example.influx.article.dto.ArticleWithoutCommentsDto;
 import com.example.influx.comment.Comment;
 import com.example.influx.comment.CommentService;
 import lombok.RequiredArgsConstructor;
@@ -15,13 +17,13 @@ public class ArticleController {
     private final CommentService commentService;
 
     @GetMapping("/articles")
-    public List<Article> getArticles() {
-        return articleService.getArticles();
+    public List<ArticleWithoutCommentsDto> getArticlesWithoutComments() {
+        return ArticleMapper.mapToArticleWithoutCommentsDtos(articleService.getArticlesWithoutComments());
     }
 
     @GetMapping("/articles/{id}")
-    public Optional<Article> getArticleById(@PathVariable Long id) {
-        return articleService.getArticleById(id);
+    public ArticleDto getArticleById(@PathVariable Long id) {
+        return ArticleMapper.mapToArticleDtos(articleService.getArticleById(id));
     }
 
 

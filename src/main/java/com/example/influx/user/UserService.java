@@ -3,7 +3,7 @@ package com.example.influx.user;
 
 import com.example.influx.user.dto.UserAccountCredentialsDto;
 import com.example.influx.user.dto.UserRegistrationDto;
-import com.example.influx.user.mapper.UserAccountCredentialsDtoMapper;
+import com.example.influx.user.mapper.UserDtoMapper;
 import com.example.influx.user.repository.UserRepository;
 import com.example.influx.user.repository.UserRoleRepository;
 import jakarta.transaction.Transactional;
@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.Set;
 
@@ -37,7 +36,7 @@ public class UserService {
 
     public Optional<UserAccountCredentialsDto> findCredentialsByEmail(String email) {
         return userRepository.findByEmail(email)
-                .map(UserAccountCredentialsDtoMapper::map);
+                .map(UserDtoMapper::map);
     }
 
     @Transactional

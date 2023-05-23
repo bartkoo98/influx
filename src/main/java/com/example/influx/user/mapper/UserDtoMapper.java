@@ -7,7 +7,7 @@ import com.example.influx.user.dto.UserAccountCredentialsDto;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class UserAccountCredentialsDtoMapper {
+public class UserDtoMapper {
     public static UserAccountCredentialsDto map(UserAccount userAccount) {
         String email = userAccount.getEmail();
         String password = userAccount.getPassword();
@@ -17,4 +17,8 @@ public class UserAccountCredentialsDtoMapper {
                 .collect(Collectors.toSet());
         return new UserAccountCredentialsDto(email, password, roles);
     }
+
+
+
+
 }

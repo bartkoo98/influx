@@ -9,13 +9,13 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Getter
 @Setter
 @RequiredArgsConstructor
+
 public class UserAccount {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,6 +27,10 @@ public class UserAccount {
     @NotNull
     @Size(min = 6, max = 100)
     private String password;
+    private String firstName;
+    private String lastName;
+    private String companyName;
+    private String shortDescription;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_roles",
@@ -34,5 +38,6 @@ public class UserAccount {
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
     )
     private Set<UserRole> roles;
+
 
 }

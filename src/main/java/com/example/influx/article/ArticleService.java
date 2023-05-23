@@ -1,6 +1,6 @@
 package com.example.influx.article;
 
-import com.example.influx.comment.CommentRepository;
+import com.example.influx.article.dto.ArticleDto;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,12 +14,12 @@ import java.util.Optional;
 public class ArticleService {
     private final ArticleRepository articleRepository;
 
-    public List<Article> getArticles() {
+    public List<Article> getArticlesWithoutComments() {
         return articleRepository.findAll();
     }
 
-    public Optional<Article> getArticleById(@PathVariable Long id) {
-        return articleRepository.findById(id);
+    public Article getArticleById(@PathVariable Long id) {
+        return articleRepository.findById(id).orElseThrow();
     }
 
     public Article addArticle(Article article) {
