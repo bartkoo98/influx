@@ -1,5 +1,6 @@
 package com.example.influx.security;
 
+import io.swagger.v3.oas.models.annotations.OpenAPI31;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -19,37 +20,29 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
+@OpenAPI31
 public class SecurityConfig {
     private final CustomUserDetailsService customUserDetailsService;
-    @Autowired
-    public SecurityConfig(CustomUserDetailsService customUserDetailsService) {
-        this.customUserDetailsService = customUserDetailsService;
-    }
+
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
-                .authorizeHttpRequests()
-                .requestMatchers("/swagger-ui/index.html#/").permitAll()
+        http.authorizeHttpRequests(requests -> requests
+                .requestMatchers("/swagger-ui/**").permitAll()
+                .requestMatchers("/swagger-resources/**").permitAll()
+                .requestMatchers("/v3/api-docs/**").permitAll()
                 .requestMatchers("/h2-console/**").permitAll()
-                .requestMatchers("/api/auth/**").permitAll()
+                .requestMatchers("/").permitAll()
+                .requestMatchers("/admin/**").hasAnyRole("ADMIN")
                 .anyRequest().authenticated()
-                .and()
-                .httpBasic();
 
+        );
+        http.httpBasic();
+        http.csrf().disable();
         return http.build();
     }
 
 
-    @Bean
-    public AuthenticationManager authenticationManager(
-            AuthenticationConfiguration authenticationConfiguration) throws Exception {
-        return authenticationConfiguration.getAuthenticationManager();
-    }
 
-    @Bean
-    PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
 }

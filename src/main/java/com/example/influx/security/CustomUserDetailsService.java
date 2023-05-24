@@ -1,10 +1,8 @@
 package com.example.influx.security;
 
-import com.example.influx.user.UserAccount;
-import com.example.influx.user.UserRole;
-import com.example.influx.user.dto.UserAccountProfileDataDto;
-import com.example.influx.user.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
+import com.example.influx.entity.UserRole;
+import com.example.influx.service.UserService;
+import com.example.influx.dto.UserAccountCredentialsDto;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -14,22 +12,30 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
-    private UserRepository userRepository;
+    private final UserService userService;
 
-    public CustomUserDetailsService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public CustomUserDetailsService(UserService userService) {
+        this.userService = userService;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserAccount user = userRepository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException("Username not found"));
-        return new User(user.getEmail(), user.getPassword(), mapRolesToAuthorities(user.getRoles()));
+        return userService.findCredentialsByEmail(username)
+                .map(this::createUserDetails)
+                .orElseThrow(() -> new UsernameNotFoundException("User with email %s not found".formatted(username)));
+    }
+
+    private UserDetails createUserDetails(UserAccountCredentialsDto userAccountCredentialsDto) {
+        return User.builder()
+                .username(userAccountCredentialsDto.getEmail())
+                .password(userAccountCredentialsDto.getPassword())
+                .roles(userAccountCredentialsDto.getRoles().toArray(String[]::new))
+                .build();
     }
 
     private Collection<GrantedAuthority> mapRolesToAuthorities(Set<UserRole> roles) {
