@@ -6,6 +6,7 @@ large collection of blogs, where each creator can add his articles on
 various topics, start a discussion in the comments with readers, or
 throw in short notes. My inspiration was the substack website. 
 For now it is poor version which looks like typical blog, but I am working on improving it.
+Now I am changing whole security, after I am going to add a lot of tests.
 Soon:
 * Subscription option to let the creator manage who can see the articles.
 * Possibility of sending articles like newsletters.
