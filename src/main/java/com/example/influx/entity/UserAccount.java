@@ -20,12 +20,10 @@ public class UserAccount {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Email
-    @Size(min = 5, max = 100)
+
     private String email;
     @JsonIgnore
-    @NotNull
-    @Size(min = 6, max = 100)
+
     private String password;
     private String firstName;
     private String lastName;

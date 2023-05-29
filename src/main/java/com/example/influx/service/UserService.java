@@ -1,14 +1,12 @@
 package com.example.influx.service;
 
 
-import com.example.influx.entity.UserAccount;
 import com.example.influx.dto.UserAccountCredentialsDto;
-import com.example.influx.mapper.UserDtoMapper;
+import com.example.influx.entity.UserAccount;
+import com.example.influx.mapper.UserMapper;
 import com.example.influx.repository.UserRepository;
 import com.example.influx.repository.UserRoleRepository;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -22,7 +20,6 @@ public class UserService {
     private static final String ADMIN_AUTHORITY = "ROLE_ADMIN";
     private final UserRepository userRepository;
     private final UserRoleRepository userRoleRepository;
-//    private final PasswordEncoder passwordEncoder;
 
 
 
@@ -39,21 +36,21 @@ public class UserService {
 
     public Optional<UserAccountCredentialsDto> findCredentialsByEmail(String email) {
         return userRepository.findByEmail(email)
-                .map(UserDtoMapper::map);
+                .map(UserMapper::map);
     }
-    @Transactional
-    public void deleteUserById(Long id) {
-        if(isCurrentUserAdmin()) {
-            userRepository.deleteById(id);
-        }
-    }
+//    @Transactional
+//    public void deleteUserById(Long id) {
+//        if(isCurrentUserAdmin()) {
+//            userRepository.deleteById(id);
+//        }
+//    }
 
-    private boolean isCurrentUserAdmin() {
-        return SecurityContextHolder.getContext()
-                .getAuthentication()
-                .getAuthorities().stream()
-                .anyMatch(authority -> authority.getAuthority().equals(ADMIN_AUTHORITY));
-    }
+//    private boolean isCurrentUserAdmin() {
+//        return SecurityContextHolder.getContext()
+//                .getAuthentication()
+//                .getAuthorities().stream()
+//                .anyMatch(authority -> authority.getAuthority().equals(ADMIN_AUTHORITY));
+//    }
 
 //    @Transactional
 //    public UserAccount register(UserRegistrationDto userRegistrationDto) {

@@ -14,7 +14,7 @@ public class ArticleMapper {
     public static List<ArticleWithoutCommentsDto> mapToArticleWithoutCommentsDtos(List<Article> articles) {
         return  articles.stream()
                 .map(ArticleMapper::mapToArticleWithoutCommentsDto)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     private static ArticleWithoutCommentsDto mapToArticleWithoutCommentsDto(Article article) {
@@ -30,11 +30,16 @@ public class ArticleMapper {
                 .build();
     }
 
-    public static ArticleDto mapToArticleDtos(Article article) {
-        return mapToArticleDto(article);
+    public static List<ArticleDto>  mapToArticleDtos(List<Article> articles) {
+     return articles.stream()
+                .map(ArticleMapper::mapToArticleDto)
+                .toList();
+
     }
 
-    private static ArticleDto mapToArticleDto(Article article) {
+
+
+    public static ArticleDto mapToArticleDto(Article article) {
         var category = article.getCategory();
         var userAccount = article.getUserAccount();
         return ArticleDto.builder()

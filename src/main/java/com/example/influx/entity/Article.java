@@ -17,11 +17,9 @@ public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotNull
-    @Size(min = 5, max = 100)
+
     private String title;
-    @NotNull
-    @Size(min = 20, max = 1000)
+
     private String content;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime dateAdded;

@@ -3,3 +3,5 @@ spring:
     url: jdbc:mysql://localhost:3306/influx
     username: root
     password: Bartek98]
+  liquibase:
+    contexts: prod

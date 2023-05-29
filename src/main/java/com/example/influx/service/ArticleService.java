@@ -2,39 +2,49 @@ package com.example.influx.service;
 
 import com.example.influx.repository.ArticleRepository;
 import com.example.influx.entity.Article;
+import com.example.influx.repository.CommentRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class ArticleService {
+    private static final int PAGE_SIZE = 30;
     private final ArticleRepository articleRepository;
+    private final CommentRepository commentRepository;
 
-    public List<Article> getArticlesWithoutComments() {
-        return articleRepository.findAll();
+    public List<Article> getArticlesWithoutComments(int page, Sort.Direction sort) {
+        return articleRepository.findAllArticles(PageRequest.of(page, PAGE_SIZE, Sort.by(sort, "dateAdded")));
     }
 
-    public Article getArticleById(Long id) {
-        return articleRepository.findById(id).orElseThrow();
+    public Article getArticle(Long id) {
+        return articleRepository.findById(id)
+                .orElseThrow();
+    }
+
+//    public List<Article> getArticlesWithComments(int page, Sort.Direction sort) {
+//        return articleRepository.findAllArticles(PageRequest.of(page, PAGE_SIZE, Sort.by(sort, "dateAdded")));
+//    }
+
+    public List<Article> getArticlesByUserAccount(Long userId) {
+        return articleRepository.findArticlesByUserAccountId(userId);
     }
 
     public Article addArticle(Article article) {
         return articleRepository.save(article);
     }
 
-    public List<Article> getArticlesWithoutCommentsByCategoryId(Long id) {
-        return articleRepository.findByCategoryId(id);
-    }
-
-    @Transactional // w return moge usunac metode save bo hibernate sam sprwadza i zapisuje zedytowane pola encji
+    @Transactional
     public Article editArticle(Article article) {
         Article articleEdited = articleRepository.findById(article.getId()).orElseThrow();
-        articleEdited.setContent(article.getContent());
         articleEdited.setTitle(article.getTitle());
+        articleEdited.setContent(article.getContent());
+        articleEdited.setCategory(article.getCategory());
         return articleEdited;
     }
 
@@ -42,5 +52,8 @@ public class ArticleService {
         articleRepository.deleteById(id);
     }
 
-
+    public List<Article> getArticlesByCategory(Long categoryId) {
+        return articleRepository.findArticlesByCategoryId(categoryId);
+    }
 }
+
